@@ -1,0 +1,11 @@
+{
+    "name": "name",
+    "version": "1.0.0",
+    "scripts": {
+    },
+    "author": "smuszel",
+    "license": "ISC",
+    "dependencies": {
+        "chalk": "2.4.2"   
+    }
+}
