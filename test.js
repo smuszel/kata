@@ -15,5 +15,5 @@ const exp = [
 ];
 
 res.then(rs => rs.forEach((r, ix) => {
-   console.assert(r === exp[ix])
+   console.assert(r === exp[ix], `[${ix}] ${r} should equal ${exp[ix]}`)
 }))
