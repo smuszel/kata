@@ -1,11 +1,11 @@
 const f = require('./main');
 
-const res = [
+const res = Promise.all([
     f('a'),
     f('b'),
     f('c'),
     f('d'),
-]
+]);
 
 const exp = [
     'no file',
@@ -14,6 +14,6 @@ const exp = [
     5
 ];
 
-res.forEach((r, ix) => {
+res.then(rs => rs.forEach((r, ix) => {
    console.assert(r === exp[ix])
-})
+}))
