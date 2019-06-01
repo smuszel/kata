@@ -1,11 +1,19 @@
-const { yellow, blue, red } = require('chalk').default;
+const { isDeepStrictEqual } = require('util');
 
-const assert = async (f, xs) => {
-    xs.forEach(async ([arg, exp], ix) => {
-        const res = await f(arg);
-        const msg = `[${red(ix)}] result ${blue(res)} should equal ${yellow(exp)}`;
-        console.assert(res === exp, msg);
-    });
-}
+module.exports = (title, t) => {
+    let i = 0;
+    const comparator = (a, b) => {
+        const pass = isDeepStrictEqual(a, b);
 
-module.exports = { assert };
+        if (!pass) {
+            const cnc = require('concordance');
+            const chalk = require('chalk').default;
+            const diff = cnc.diff(a, b);
+            console.log(chalk.red(title), `[${i}]`);
+            console.log(diff);
+        }
+        i++;
+    };
+
+    t(comparator);
+};

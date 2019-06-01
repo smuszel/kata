@@ -2,10 +2,12 @@
     "name": "name",
     "version": "1.0.0",
     "scripts": {
+        "test": "ava ./test/**/*.spec.js"
     },
     "author": "smuszel",
     "license": "ISC",
     "dependencies": {
-        "chalk": "2.4.2"   
+        "chalk": "2.4.2",
+        "ava": "1.4.1"
     }
 }
