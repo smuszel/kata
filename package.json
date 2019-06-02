@@ -2,12 +2,18 @@
     "name": "name",
     "version": "1.0.0",
     "scripts": {
-        "test": "ava ./test/**/*.spec.js"
+        "test": "jest simple-counter"
     },
     "author": "smuszel",
     "license": "ISC",
     "dependencies": {
+        "@babel/core": "^7.4.5",
+        "@babel/preset-env": "^7.4.5",
+        "@testing-library/dom": "5.1.1",
+        "@types/jest": "^24.0.13",
         "chalk": "2.4.2",
-        "ava": "1.4.1"
+        "concordance": "^4.0.0",
+        "jest": "24.8.0",
+        "jest-dom": "^3.4.0"
     }
 }
