@@ -1,46 +1,63 @@
+const findCaller = require('./findCaller');
+const getCaller = require('./getCaller');
+const jsdom = require('jsdom');
 const cnc = require('concordance');
 const chalk = require('chalk').default;
 
-const stackTraceParser = stackTrace => {
-    const chunks = stackTrace.split(/\n/g);
-    const caller = chunks[2].split('at ')[1].split(':');
-    const callerFilename = caller[0] + ':' + caller[1];
-    const callerLine = +caller[2];
+/** @type {Testcase[]} */
+const runningTests = [];
 
-    return { callerFilename, callerLine };
+/** @param {Caller} caller */
+const findTestcase = caller => {
+    let diff = Infinity;
+    /** @type {Testcase} */
+    let testcase;
+
+    runningTests.forEach(test => {
+        const currDiff = caller.line - test.caller.line;
+        if (currDiff > 0 && currDiff < diff) {
+            diff = currDiff;
+            testcase = test;
+        }
+    });
+
+    //@ts-ignore
+    return testcase;
+};
+
+// @ts-ignore
+Reflect.defineProperty(global, 'window', {
+    get: () => {
+        return findTestcase(findCaller(new Error().stack, 'test.js')).window;
+    },
+});
+
+// @ts-ignore
+Reflect.defineProperty(global, 'document', {
+    get: () => {
+        return findTestcase(findCaller(new Error().stack, 'test.js')).document;
+    },
+});
+
+const comparator = (a, b) => {
+    const pass = cnc.compare(a, b).pass;
+
+    if (!pass) {
+        const diff = cnc.diff(a, b);
+        const { line } = getCaller(new Error().stack);
+        const out = JSON.stringify({ callerLine: line, diff });
+
+        console.log(out);
+    }
 };
 
 module.exports = (title, t) => {
-    const comparator = (a, b) => {
-        const pass = cnc.compare(a, b).pass;
-
-        if (!pass) {
-            const diff = cnc.diff(a, b);
-            const { callerLine } = stackTraceParser(new Error().stack);
-            const out = JSON.stringify({ callerLine, diff });
-
-            console.log(out);
-        }
-    };
-
-    t(comparator);
+    const dom = new jsdom.JSDOM();
+    const caller = getCaller(new Error().stack);
+    const window = dom.window;
+    const document = dom.window.document;
+    runningTests.push({ caller, window, document });
+    setImmediate(() => {
+        t(comparator);
+    });
 };
-
-// const fs = require('fs');
-// const src = fs
-//     .readFileSync(ss[0] + ':' + ss[1])
-//     .toString()
-//     .split('\n');
-// const startIx = src.findIndex(line => line.includes(title));
-// const endIx =
-//     src.slice(startIx, src.length).findIndex(line => {
-//         return line === '});\r';
-//     }) + startIx;
-// const lines = src.slice(startIx, endIx + 1);
-// const failIx = +ss[2] - startIx - 1;
-// console.log(failIx);
-// lines[failIx] = chalk.bgRedBright(lines[failIx]);
-// console.log('\n');
-// console.log(lines.join('\n'));
-// console.log('\n');
-// console.log(diff);
