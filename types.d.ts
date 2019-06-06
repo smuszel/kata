@@ -4,3 +4,9 @@ declare type Testcase = {
     window: any;
     document: any;
 };
+
+declare type Item = {
+    type: 'regular'
+    quality: number
+    sellIn: number
+}

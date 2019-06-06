@@ -15,6 +15,7 @@
         "chalk": "2.4.2",
         "concordance": "^4.0.0",
         "jest": "24.8.0",
+        "vanad": "0.0.3-alpha",
         "jest-dom": "^3.4.0"
     }
 }

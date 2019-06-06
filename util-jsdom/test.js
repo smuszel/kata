@@ -1,5 +1,5 @@
 //@vanad
-const t = require('../util');
+const t = require('vanad');
 const f = require('./f');
 
 t('Has text click me', t => {
