@@ -1,6 +1,6 @@
 /** @type {(item: Item) => Item} */
 module.exports = item => {
-    const type = item.type;
+    const type = item.quality === 0 ? 'trash' : item.type;
     const sellInDelta = -1;
     const pastSellIn = item.sellIn === 0;
     const qualityDelta = (type === 'hot' ? 2 : 1) * (pastSellIn ? 2 : 1) * -1;
