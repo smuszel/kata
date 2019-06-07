@@ -6,7 +6,7 @@ declare type Testcase = {
 };
 
 declare type Item = {
-    type: 'regular'
+    type: 'regular' | 'hot'
     quality: number
     sellIn: number
 }
