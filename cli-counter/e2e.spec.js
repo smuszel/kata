@@ -52,3 +52,22 @@ test('When pushed numbers shows running sum', c => {
         }, 100);
     }, 100);
 });
+
+test('Adds only correct input', c => {
+    const p = cp.spawn('node', ['./index.js'], { cwd: __dirname });
+    let std = [];
+    p.stdout.on('data', d => {
+        std.push(d);
+    });
+
+    p.stdin.write('1');
+
+    setTimeout(() => {
+        c(renderStd(std), ['1', '']);
+        p.stdin.write('a');
+        setTimeout(() => {
+            c(renderStd(std), ['1', '']);
+            p.kill();
+        }, 100);
+    }, 100);
+});
