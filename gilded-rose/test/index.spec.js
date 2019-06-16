@@ -1,8 +1,7 @@
-// @vanad
-const t = require('vanad');
-const f = require('./f');
+const test = require('vanad');
+const f = require('../src/main');
 
-t('Ages regular items', c => {
+test('Ages regular items', c => {
     c(f({ type: 'regular', sellIn: 10, quality: 10 }), {
         type: 'regular',
         sellIn: 9,
@@ -13,9 +12,9 @@ t('Ages regular items', c => {
         sellIn: 0,
         quality: 1,
     });
-});
+}, 2);
 
-t('Quality and sellin cannot drop below zero', c => {
+test('Quality and sellin cannot drop below zero', c => {
     c(f({ type: 'regular', sellIn: 0, quality: 1 }), {
         type: 'regular',
         sellIn: 0,
@@ -26,9 +25,9 @@ t('Quality and sellin cannot drop below zero', c => {
         sellIn: 10,
         quality: 0,
     });
-});
+}, 2);
 
-t('Quality degardes faster when past the sell in', c => {
+test('Quality degardes faster when past the sell in', c => {
     c(f({ type: 'regular', sellIn: 0, quality: 10 }), {
         type: 'regular',
         sellIn: 0,
@@ -39,15 +38,15 @@ t('Quality degardes faster when past the sell in', c => {
         sellIn: 0,
         quality: 0,
     });
-});
+}, 2);
 
-t('Quality degrades twice as fast for hot items', c => {
+test('Quality degrades twice as fast for hot items', c => {
     c(f({ type: 'hot', sellIn: 0, quality: 6 }), { type: 'hot', sellIn: 0, quality: 2 });
     c(f({ type: 'hot', sellIn: 0, quality: 3 }), { type: 'hot', sellIn: 0, quality: 0 });
     c(f({ type: 'hot', sellIn: 10, quality: 6 }), { type: 'hot', sellIn: 9, quality: 4 });
-});
+}, 3);
 
-t('Items convert to trash when item quality is 0', c => {
+test('Items convert to trash when item quality is 0', c => {
     c(f({ type: 'hot', sellIn: 0, quality: 0 }), {
         type: 'trash',
         sellIn: 0,
@@ -58,4 +57,4 @@ t('Items convert to trash when item quality is 0', c => {
         sellIn: 0,
         quality: 0,
     });
-});
+}, 2);

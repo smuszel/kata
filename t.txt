@@ -1,4 +1,0 @@
-s1 = "    at c:\\Users\\jkomm\\Desktop\\kata\\util-jsdom\\test.js:7:5"
-"    at c:\Users\jkomm\Desktop\kata\util-jsdom\test.js:7:5"
-s2 = "    at Object.<anonymous> (c:\\Users\\jkomm\\Desktop\\kata\\util-jsdom\\test.js:5:1)"
-"    at Object.<anonymous> (c:\Users\jkomm\Desktop\kata\util-jsdom\test.js:5:1)"

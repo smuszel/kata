@@ -1,21 +1,11 @@
 {
     "name": "name",
     "version": "1.0.0",
-    "scripts": {
-        "test": "jest simple-counter",
-        "test:exp": "node util-jsdom/test.js"
-    },
+    "scripts": {},
     "author": "smuszel",
     "license": "ISC",
     "dependencies": {
-        "@babel/core": "^7.4.5",
-        "@babel/preset-env": "^7.4.5",
-        "@testing-library/dom": "5.1.1",
-        "@types/jest": "^24.0.13",
-        "chalk": "2.4.2",
-        "concordance": "^4.0.0",
-        "jest": "24.8.0",
-        "vanad": "0.0.9",
-        "jest-dom": "^3.4.0"
+        "jsdom": "15.1.1",
+        "vanad": "0.1.1"
     }
 }

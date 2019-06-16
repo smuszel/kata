@@ -9,7 +9,7 @@ const renderStd = std => {
 };
 
 test('Does not close immediately', c => {
-    const p = cp.spawn('node', ['./index.js'], { cwd: __dirname });
+    const p = cp.spawn('node', ['../src/index.js'], { cwd: __dirname });
     let closed = false;
     p.on('close', () => {
         closed = true;
@@ -22,7 +22,7 @@ test('Does not close immediately', c => {
 });
 
 test('Does not log anything', c => {
-    const p = cp.spawn('node', ['./index.js'], { cwd: __dirname });
+    const p = cp.spawn('node', ['../src/index.js'], { cwd: __dirname });
     let out = false;
     p.stdout.on('data', () => {
         out = true;
@@ -35,7 +35,7 @@ test('Does not log anything', c => {
 });
 
 test('When pushed numbers shows running sum', c => {
-    const p = cp.spawn('node', ['./index.js'], { cwd: __dirname });
+    const p = cp.spawn('node', ['../src/index.js'], { cwd: __dirname });
     let std = [];
     p.stdout.on('data', d => {
         std.push(d);
@@ -51,10 +51,10 @@ test('When pushed numbers shows running sum', c => {
             p.kill();
         }, 100);
     }, 100);
-});
+}, 2);
 
 test('Adds only correct input', c => {
-    const p = cp.spawn('node', ['./index.js'], { cwd: __dirname });
+    const p = cp.spawn('node', ['../src/index.js'], { cwd: __dirname });
     let std = [];
     p.stdout.on('data', d => {
         std.push(d);
@@ -70,4 +70,4 @@ test('Adds only correct input', c => {
             p.kill();
         }, 100);
     }, 100);
-});
+}, 2);
