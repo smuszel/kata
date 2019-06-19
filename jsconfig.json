@@ -8,6 +8,7 @@
         "noImplicitAny": false,
         "strictNullChecks": true,
         "forceConsistentCasingInFileNames": true,
+        "jsx": "react",
         "lib": ["esnext", "dom"]
     }
 }
