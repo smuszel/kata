@@ -5,5 +5,9 @@ export const App = () => {
         document.title = 'ABC Products';
     }, []);
 
-    return <button>show products</button>;
+    return (
+        <a href="#/products">
+            <button>show products</button>
+        </a>
+    );
 };

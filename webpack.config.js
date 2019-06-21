@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const { resolve } = require('path');
+const HtmlPlugin = require('html-webpack-plugin');
 
 /** @type {webpack.Configuration} */
 module.exports = {
@@ -17,5 +18,8 @@ module.exports = {
         ],
     },
     devtool: 'source-map',
-    plugins: [new webpack.ProgressPlugin()],
+    plugins: [new webpack.ProgressPlugin(), new HtmlPlugin({
+        template: './src/index.html',
+        filename: '../index.html'
+    })],
 };

@@ -24820,7 +24820,9 @@ const App = () => {
   react__WEBPACK_IMPORTED_MODULE_0___default.a.useEffect(() => {
     document.title = 'ABC Products';
   }, []);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "show products");
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#/products"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "show products"));
 };
 
 /***/ }),
