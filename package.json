@@ -9,6 +9,12 @@
     "author": "smuszel",
     "license": "ISC",
     "dependencies": {
+        "react": "^16.8.6",
+        "react-dom": "^16.8.6",
+        "react-router": "^5.0.1",
+        "react-router-dom": "^5.0.1"
+    },
+    "devDependencies": {
         "@babel/plugin-proposal-class-properties": "^7.4.4",
         "@babel/plugin-syntax-dynamic-import": "^7.2.0",
         "@babel/preset-react": "^7.0.0",
@@ -18,21 +24,12 @@
         "@types/react-router-dom": "^4.3.4",
         "babel-loader": "^8.0.6",
         "chai": "^4.2.0",
-        "chai-datetime": "^1.5.0",
         "css-loader": "^3.0.0",
         "html-webpack-plugin": "^3.2.0",
-        "jsdom": "15.1.1",
-        "react": "^16.8.6",
-        "react-dom": "^16.8.6",
-        "react-router": "^5.0.1",
-        "react-router-dom": "^5.0.1",
         "style-loader": "^0.23.1",
-        "vanad": "0.1.1",
         "webpack": "^4.34.0",
         "webpack-cli": "^3.3.4",
-        "webpack-dev-server": "^3.7.2"
-    },
-    "devDependencies": {
+        "webpack-dev-server": "^3.7.2",
         "@babel/core": "^7.4.5",
         "@babel/preset-env": "^7.4.5",
         "@types/chai": "^4.1.7",
