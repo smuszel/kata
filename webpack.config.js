@@ -7,6 +7,9 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx', '.css'],
     },
+    devServer: {
+        historyApiFallback: false,
+    },
     module: {
         rules: [
             {
@@ -18,8 +21,11 @@ module.exports = {
         ],
     },
     devtool: 'source-map',
-    plugins: [new webpack.ProgressPlugin(), new HtmlPlugin({
-        template: './src/index.html',
-        filename: '../index.html'
-    })],
+    plugins: [
+        new webpack.ProgressPlugin(),
+        new HtmlPlugin({
+            template: './src/index.html',
+            filename: '../index.html',
+        }),
+    ],
 };
