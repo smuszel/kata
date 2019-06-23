@@ -1,13 +1,16 @@
 import React from 'react';
+import { Product } from './Product';
+import { List } from './List';
+
+const p = { title: 'product title', price: '100' };
 
 export const Products = () => {
     return (
-        <ul id="products-list">
-            <li>A</li>
-            <li>A</li>
-            <li>A</li>
-            <li>A</li>
-            <li>b</li>
-        </ul>
+        <List
+            Comp={Product}
+            id="products-list"
+            className="products"
+            items={Array(5).fill(p)}
+        />
     );
 };

@@ -13,8 +13,5 @@ export const App = () => {
             <Route exact path="/" component={Landing} />
             <Route path="/products" component={Products} />
         </HashRouter>
-        // <a href="#/products">
-        //     <button id="show-products">show products</button>
-        // </a>
     );
 };

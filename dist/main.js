@@ -24355,7 +24355,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28784,10 +28784,7 @@ const App = () => {
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/products",
     component: _Products__WEBPACK_IMPORTED_MODULE_3__["Products"]
-  })) // <a href="#/products">
-  //     <button id="show-products">show products</button>
-  // </a>
-  ;
+  }));
 };
 
 /***/ }),
@@ -28817,6 +28814,63 @@ const Landing = () => {
 
 /***/ }),
 
+/***/ "./src/List.js":
+/*!*********************!*\
+  !*** ./src/List.js ***!
+  \*********************/
+/*! exports provided: List */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "List", function() { return List; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const List = ({
+  items,
+  id,
+  className,
+  Comp
+}) => {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    id: id,
+    className: className
+  }, items.map((x, ix) => {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      key: ix
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Comp, x));
+  }));
+};
+
+/***/ }),
+
+/***/ "./src/Product.js":
+/*!************************!*\
+  !*** ./src/Product.js ***!
+  \************************/
+/*! exports provided: Product */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Product", function() { return Product; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const Product = ({
+  title,
+  price
+}) => {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+    className: "title"
+  }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "price"
+  }, price));
+};
+
+/***/ }),
+
 /***/ "./src/Products.js":
 /*!*************************!*\
   !*** ./src/Products.js ***!
@@ -28829,11 +28883,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Products", function() { return Products; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Product__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Product */ "./src/Product.js");
+/* harmony import */ var _List__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./List */ "./src/List.js");
 
+
+
+const p = {
+  title: 'product title',
+  price: '100'
+};
 const Products = () => {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    id: "products-list"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "A"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "A"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "A"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "A"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "b"));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_List__WEBPACK_IMPORTED_MODULE_2__["List"], {
+    Comp: _Product__WEBPACK_IMPORTED_MODULE_1__["Product"],
+    id: "products-list",
+    className: "products",
+    items: Array(5).fill(p)
+  });
 };
 
 /***/ }),

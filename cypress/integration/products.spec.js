@@ -1,4 +1,9 @@
-import { listOfProducts, showProductsButton, linkToProducts } from './selectors';
+import {
+    listOfProducts,
+    showProductsButton,
+    linkToProducts,
+    productsInList,
+} from './selectors';
 
 describe('Products page', () => {
     beforeEach(() => {
@@ -14,5 +19,12 @@ describe('Products page', () => {
         cy.get(listOfProducts)
             .children()
             .should('have.length', 5);
+    });
+
+    it('each product has title and price', () => {
+        const products = cy.get(productsInList);
+
+        products.get('.title').should('have.text', 'product title'.repeat(5));
+        products.get('.price').should('have.text', '100'.repeat(5));
     });
 });
