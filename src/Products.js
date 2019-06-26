@@ -1,16 +1,23 @@
 import React from 'react';
+import axios from 'axios';
 import { Product } from './Product';
 import { List } from './List';
 
-const p = { title: 'product title', price: '100' };
+const Loader = () => {
+    return <div className="loader"></div>;
+};
 
 export const Products = () => {
-    return (
-        <List
-            Comp={Product}
-            id="products-list"
-            className="products"
-            items={Array(5).fill(p)}
-        />
+    const [_products, setState] = React.useState([]);
+    React.useEffect(() => {
+        axios.get('/api/products').then(r => {
+            setState(r.data);
+        });
+    }, []);
+
+    return _products.length ? (
+        <List Comp={Product} id="products-list" className="products" items={_products} />
+    ) : (
+        <Loader />
     );
 };

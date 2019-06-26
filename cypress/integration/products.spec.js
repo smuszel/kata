@@ -3,7 +3,10 @@ import {
     showProductsButton,
     linkToProducts,
     productsInList,
+    loader,
 } from './selectors';
+
+import { products } from '../fixtures/products';
 
 describe('Products page', () => {
     beforeEach(() => {
@@ -15,16 +18,28 @@ describe('Products page', () => {
         cy.get(linkToProducts).should('not.exist');
     });
 
-    it('has list of 5 products', () => {
+    it('shows loader', () => {
+        cy.get(loader).should('exist');
+    });
+
+    it('requests of products from api and displays them all', () => {
+        cy.server();
+        cy.route({
+            url: '/api/products',
+            response: JSON.stringify(products),
+            method: 'GET',
+        }).as('products');
+        cy.wait('@products');
+
         cy.get(listOfProducts)
             .children()
-            .should('have.length', 5);
+            .should('have.length', products.length);
     });
 
-    it('each product has title and price', () => {
-        const products = cy.get(productsInList);
+    // it('each product has title and price', () => {
+    //     const productsUi = cy.get(productsInList);
 
-        products.get('.title').should('have.text', 'product title'.repeat(5));
-        products.get('.price').should('have.text', '100'.repeat(5));
-    });
+    //     productsUi.get('.title').should('have.text', products.map(p => p.title).join(''));
+    //     productsUi.get('.price').should('have.text', products.map(p => p.price).join(''));
+    // });
 });
