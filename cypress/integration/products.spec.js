@@ -2,8 +2,8 @@ import {
     listOfProducts,
     showProductsButton,
     linkToProducts,
-    productsInList,
-    loader,
+    runningLoader,
+    frozenLoader,
 } from './selectors';
 
 import { products } from '../fixtures/products';
@@ -18,8 +18,8 @@ describe('Products page', () => {
         cy.get(linkToProducts).should('not.exist');
     });
 
-    it('shows loader', () => {
-        cy.get(loader).should('exist');
+    it('shows loader on start', () => {
+        cy.get(runningLoader).should('exist');
     });
 
     it('requests of products from api and displays them all', () => {
@@ -34,6 +34,17 @@ describe('Products page', () => {
         cy.get(listOfProducts)
             .children()
             .should('have.length', products.length);
+    });
+
+    it('shown frozen loader on rejection', () => {
+        cy.server();
+        cy.route({
+            url: '/api/products',
+            response: '',
+            status: 500,
+            method: 'GET',
+        }).as('products');
+        cy.get(frozenLoader).should('exist');
     });
 
     // it('each product has title and price', () => {

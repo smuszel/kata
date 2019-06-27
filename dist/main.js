@@ -30852,17 +30852,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const Loader = () => {
+const Loader = ({
+  isFrozen
+}) => {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "loader"
+    className: `loader ${isFrozen ? 'freeze' : 'spin'}`
   });
 };
 
 const Products = () => {
-  const [_products, setState] = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState([]);
+  const [_products, setProducts] = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState([]);
+  const [hasErrors, setErrors] = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(false);
   react__WEBPACK_IMPORTED_MODULE_0___default.a.useEffect(() => {
     axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/products').then(r => {
-      setState(r.data);
+      setProducts(r.data);
+    }).catch(() => {
+      setErrors(true);
     });
   }, []);
   return _products.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_List__WEBPACK_IMPORTED_MODULE_3__["List"], {
@@ -30870,7 +30875,9 @@ const Products = () => {
     id: "products-list",
     className: "products",
     items: _products
-  }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Loader, null);
+  }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Loader, {
+    isFrozen: hasErrors
+  });
 };
 
 /***/ }),

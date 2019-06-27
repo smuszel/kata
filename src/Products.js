@@ -3,21 +3,27 @@ import axios from 'axios';
 import { Product } from './Product';
 import { List } from './List';
 
-const Loader = () => {
-    return <div className="loader"></div>;
+const Loader = ({ isFrozen }) => {
+    return <div className={`loader ${isFrozen ? 'freeze' : 'spin'}`}></div>;
 };
 
 export const Products = () => {
-    const [_products, setState] = React.useState([]);
+    const [_products, setProducts] = React.useState([]);
+    const [hasErrors, setErrors] = React.useState(false);
     React.useEffect(() => {
-        axios.get('/api/products').then(r => {
-            setState(r.data);
-        });
+        axios
+            .get('/api/products')
+            .then(r => {
+                setProducts(r.data);
+            })
+            .catch(() => {
+                setErrors(true);
+            });
     }, []);
 
     return _products.length ? (
         <List Comp={Product} id="products-list" className="products" items={_products} />
     ) : (
-        <Loader />
+        <Loader isFrozen={hasErrors} />
     );
 };
