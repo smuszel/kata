@@ -4,6 +4,7 @@ import {
     linkToProducts,
     runningLoader,
     frozenLoader,
+    productsInList,
 } from './selectors';
 
 import { products } from '../fixtures/products';
@@ -47,10 +48,17 @@ describe('Products page', () => {
         cy.get(frozenLoader).should('exist');
     });
 
-    // it('each product has title and price', () => {
-    //     const productsUi = cy.get(productsInList);
+    it('each product has title and price', () => {
+        cy.server();
+        cy.route({
+            url: '/api/products',
+            response: JSON.stringify(products),
+            method: 'GET',
+        }).as('products');
 
-    //     productsUi.get('.title').should('have.text', products.map(p => p.title).join(''));
-    //     productsUi.get('.price').should('have.text', products.map(p => p.price).join(''));
-    // });
+        const productsUi = cy.get(productsInList);
+
+        productsUi.get('.title').should('have.text', products.map(p => p.title).join(''));
+        productsUi.get('.price').should('have.text', products.map(p => p.price).join(''));
+    });
 });
