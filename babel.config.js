@@ -10,10 +10,6 @@ module.exports = {
                 targets,
             },
         ],
-        '@babel/preset-react',
         '@babel/preset-typescript',
-    ],
-    plugins: [
-        '@babel/plugin-syntax-dynamic-import',
     ],
 };
